@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "1063381046055",
+    "firebase_url": "https://ayudapp-b2fc3.firebaseio.com",
+    "project_id": "ayudapp-b2fc3",
+    "storage_bucket": "ayudapp-b2fc3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1063381046055:android:7b9146759bde6c7948cf02",
+        "android_client_info": {
+          "package_name": "com.ayudapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1063381046055-1srgpeg5nkvmtrfo1tiupn9lhamijg6v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ayudapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "1063381046055-lfg1g7errnes2r875df0327gadnn7uub.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ayudapp",
+            "certificate_hash": "f157f67785a5d7caf81391ca891bca62c37772ec"
+          }
+        },
+        {
+          "client_id": "1063381046055-e55l58se6g6mbhvm3ibeifhh86e8esv2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVMwujPRrFku8fS02pJ-sqUuXrWRQ6O8I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1063381046055-e55l58se6g6mbhvm3ibeifhh86e8esv2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
