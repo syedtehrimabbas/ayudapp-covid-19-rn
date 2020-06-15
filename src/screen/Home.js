@@ -1,28 +1,23 @@
 import {
-  CheckBox,
-  Image,
-  KeyboardAvoidingView,
-  Picker,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
+    CheckBox,
+    Image,
+    KeyboardAvoidingView,
+    Picker,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
 } from 'react-native';
 import React, {Component} from 'react';
-import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
+import {heightPercentageToDP as hp, widthPercentageToDP as wp,} from 'react-native-responsive-screen';
 
 import AsyncStorage from '@react-native-community/async-storage';
-import Dropdown from './DropDown';
 import Geolocation from '@react-native-community/geolocation';
 import Images from '../Image/Images';
 import Loader from '../screen/Loader';
 import {ScrollView} from 'react-native-gesture-handler';
 import Services from '../FireServices/FireServices';
-import auth from '@react-native-firebase/auth';
 import colors from '../theme/colors';
 
 let helpType = '';
@@ -204,6 +199,7 @@ export default class Home extends Component {
     this.focusListner = this.props.navigation.addListener('didFocus', () => {
       this.setOrderRistriction();
     });
+
     Geolocation.getCurrentPosition((info) => {
       console.log('info', info);
       this.setState({
@@ -588,13 +584,7 @@ export default class Home extends Component {
     );
   };
   setSelectedValue = () => {};
-  logout = async () => {
-    await auth().signOut();
-    AsyncStorage.removeItem('USER').then(() => {
-      this.props.navigation.navigate('Login');
-      this.setState({dropdown: false});
-    });
-  };
+
   render() {
     return (
       <View>
@@ -653,24 +643,6 @@ export default class Home extends Component {
                     alignSelf: 'center',
                   }}
                 />
-                <Dropdown
-                  dropdown={this.state.dropdown}
-                  onCancel={() => this.setState({dropdown: false})}
-                  onSignout={this.logout}
-                />
-                <TouchableOpacity
-                  onPress={() => this.setState({dropdown: true})}>
-                  <Image
-                    source={Images.dotmenu}
-                    style={{
-                      height: hp(5),
-                      width: wp(7),
-                      resizeMode: 'contain',
-                      alignSelf: 'flex-end',
-                      marginRight: wp(5),
-                    }}
-                  />
-                </TouchableOpacity>
                 <View style={{paddingLeft: wp(5), borderBottomWidth: 1}}>
                   <Text>Usted necesita</Text>
                   <View style={styles.oPtioncontainer}>
