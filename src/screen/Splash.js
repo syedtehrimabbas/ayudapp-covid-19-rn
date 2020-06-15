@@ -7,6 +7,7 @@ import {
 } from 'react-native-responsive-screen';
 
 import AsyncStorage from '@react-native-community/async-storage';
+import FireServices from '../FireServices/FireServices';
 import Images from '../Image/Images';
 
 export default class Splash extends Component {
@@ -17,14 +18,73 @@ export default class Splash extends Component {
         let screenName = '';
         if (res !== null) {
           screenName = 'UserCategory';
+
+          FireServices.getUserProfile((user) => {
+            if (user.user._data.userType !== undefined) {
+              console.log('herhehrhehrehrhe');
+              if (user.user._data.userType === 'Needy') {
+                console.log('Needy');
+                const navigateAction = StackActions.reset({
+                  index: 0,
+                  actions: [
+                    NavigationActions.navigate({routeName: `${'Home'}`}),
+                  ],
+                });
+                this.props.navigation.dispatch(navigateAction);
+                // screenName = 'Home';
+              } else if (user.user._data.userType === 'IndevidualHelper') {
+                console.log('IndevidualHelper');
+
+                // screenName = 'IndividualHelperForm';
+                const navigateAction = StackActions.reset({
+                  index: 0,
+                  actions: [
+                    NavigationActions.navigate({
+                      routeName: `${'IndividualHelperForm'}`,
+                    }),
+                  ],
+                });
+                this.props.navigation.dispatch(navigateAction);
+              } else if (user.user._data.userType === 'CompanyHelper') {
+                console.log('CompanyHelper');
+
+                // screenName = 'IndividualHelperForm';
+                const navigateAction = StackActions.reset({
+                  index: 0,
+                  actions: [
+                    NavigationActions.navigate({
+                      routeName: `${'IndividualHelperForm'}`,
+                    }),
+                  ],
+                });
+                this.props.navigation.dispatch(navigateAction);
+              } else if (user.user._data.userType === 'BankPoint') {
+                // screenName = 'BankPoint';
+                const navigateAction = StackActions.reset({
+                  index: 0,
+                  actions: [
+                    NavigationActions.navigate({routeName: `${'BankPoint'}`}),
+                  ],
+                });
+                this.props.navigation.dispatch(navigateAction);
+              }
+            } else {
+              const navigateAction = StackActions.reset({
+                index: 0,
+                actions: [
+                  NavigationActions.navigate({routeName: `${'UserCategory'}`}),
+                ],
+              });
+              this.props.navigation.dispatch(navigateAction);
+            }
+          });
         } else {
-          screenName = 'Login';
+          const navigateAction = StackActions.reset({
+            index: 0,
+            actions: [NavigationActions.navigate({routeName: `${'Login'}`})],
+          });
+          this.props.navigation.dispatch(navigateAction);
         }
-        const navigateAction = StackActions.reset({
-          index: 0,
-          actions: [NavigationActions.navigate({routeName: `${screenName}`})],
-        });
-        this.props.navigation.dispatch(navigateAction);
       });
     }, 1000);
   }
@@ -59,5 +119,6 @@ const styles = StyleSheet.create({
     fontSize: wp(6),
     marginTop: hp(10),
     textAlign: 'center',
+    color: 'white',
   },
 });

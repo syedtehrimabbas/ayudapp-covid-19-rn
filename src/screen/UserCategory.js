@@ -1,4 +1,5 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
+import {NavigationActions, StackActions} from 'react-navigation';
 import React, {Component} from 'react';
 import {
   heightPercentageToDP as hp,

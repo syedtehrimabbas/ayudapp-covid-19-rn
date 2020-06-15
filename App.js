@@ -23,6 +23,7 @@ import RequsetForm from './src/screen/RequsetForm';
 import Splash from './src/screen/Splash';
 import Statics from './src/screen/Statics';
 import UserCategory from './src/screen/UserCategory';
+import UserRequestDetail from './src/screen/UserRequestDetail';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import {createStackNavigator} from 'react-navigation-stack';
 import mapForBank from './src/screen/mapForBank';
@@ -101,12 +102,13 @@ const LoginStackNavigator = createStackNavigator(
     Splash: {
       screen: Splash,
     },
-    Statics: {
-      screen: Statics,
-    },
     Login: {
       screen: Login,
     },
+    Statics: {
+      screen: Statics,
+    },
+
     LoginConfirm: {
       screen: LoginConfirm,
     },
@@ -139,6 +141,9 @@ const LoginStackNavigator = createStackNavigator(
     },
     IndividualScreenMap: {
       screen: IndividualScreenMap,
+    },
+    UserRequestDetail: {
+      screen: UserRequestDetail,
     },
   },
   {

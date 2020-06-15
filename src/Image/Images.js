@@ -11,5 +11,6 @@ const Images = {
   arrowBack: require('../Image/arrowBack.png'),
   plus: require('../Image/plus.png'),
   subtract: require('../Image/subtract.png'),
+  dotmenu: require('../Image/dotmenu.png'),
 };
 export default Images;

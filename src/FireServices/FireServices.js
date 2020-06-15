@@ -363,15 +363,15 @@ class FireServices {
       });
   };
   confirmVerificationCode = (confirmResult, verificationCode, callBack) => {
-    console.log(confirmResult);
-    console.log(verificationCode);
     confirmResult
       .confirm(verificationCode)
       .then((res) => {
+        console.log('res-3456789876545678', res);
         callBack({isSuccess: true, response: res});
       })
       .catch((err) => {
-        console.log({isSuccess: false, error: err});
+        console.log('err', err);
+        callBack({isSuccess: false, error: err});
       });
   };
 
