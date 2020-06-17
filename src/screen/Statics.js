@@ -40,7 +40,6 @@ export default class Statics extends Component {
       time: '',
       term: '',
       image: '',
-      userType: this.props.navigation.state.params.type,
       selectedValue: '',
       countries: [],
       states: [],

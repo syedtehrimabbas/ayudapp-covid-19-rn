@@ -18,11 +18,13 @@ import {
 
 import AsyncStorage from '@react-native-community/async-storage';
 import CommmonButton from './CommonButton';
+import Images from '../Image/Images';
 import Loader from '../screen/Loader';
 import Services from '../FireServices/FireServices';
 import auth from '@react-native-firebase/auth';
 import colors from '../theme/colors';
 
+let userType = '';
 export default class BioDataForm extends Component {
   constructor(props) {
     super(props);
@@ -49,10 +51,23 @@ export default class BioDataForm extends Component {
       accessToken: '',
       userId: this.props.navigation.state.params.id,
       confirmation: false,
+      needyUser: false,
+      indevidualHelperUser: false,
+      bankUser: false,
+      companyUser: false,
     };
   }
 
   onSubmitButtonPress = () => {
+    if (this.state.needyUser) {
+      userType = 'Needy';
+    } else if (this.state.indevidualHelperUser) {
+      userType = 'IndevidualHelper';
+    } else if (this.state.companyUser) {
+      userType = 'CompanyHelper';
+    } else if (this.state.bankUser) {
+      userType = 'BankPoint';
+    }
     this.setState({loading: true});
     const {
       fname,
@@ -83,6 +98,7 @@ export default class BioDataForm extends Component {
       town,
       building,
       time,
+      userType,
       (response) => {
         console.log('biodata', response);
         if (response.isSuccess) {
@@ -151,6 +167,76 @@ export default class BioDataForm extends Component {
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
           <ScrollView style={{height: hp(90)}}>
+            <Text style={{marginLeft: 10}}>user type</Text>
+            <View style={styles.boxContainerBorderStyle}>
+              <View style={{flexDirection: 'row', padding: wp(2)}}>
+                <TouchableOpacity
+                  onPress={() =>
+                    this.setState({
+                      needyUser: true,
+                      indevidualHelperUser: false,
+                      bankUser: false,
+                      companyUser: false,
+                    })
+                  }>
+                  <Image
+                    source={
+                      this.state.needyUser ? Images.check : Images.uncheck
+                    }
+                    style={{height: hp(4), width: wp(5), resizeMode: 'contain'}}
+                  />
+                </TouchableOpacity>
+                <Text style={{marginLeft: wp(4), marginRight: wp(2)}}>
+                  Necesito ayuda (I need help)
+                </Text>
+              </View>
+              <View style={{flexDirection: 'row', padding: wp(2)}}>
+                <TouchableOpacity
+                  onPress={() =>
+                    this.setState({
+                      needyUser: false,
+                      indevidualHelperUser: true,
+                      bankUser: false,
+                      companyUser: false,
+                    })
+                  }>
+                  <Image
+                    source={
+                      this.state.indevidualHelperUser
+                        ? Images.check
+                        : Images.uncheck
+                    }
+                    style={{height: hp(4), width: wp(5), resizeMode: 'contain'}}
+                  />
+                </TouchableOpacity>
+                <Text style={{marginLeft: wp(4), marginRight: wp(2)}}>
+                  Quiero ayudar (I want to help) soy un individuo (I am an
+                  individual)
+                </Text>
+              </View>
+              <View style={{flexDirection: 'row', padding: wp(2)}}>
+                <TouchableOpacity
+                  onPress={() =>
+                    this.setState({
+                      needyUser: false,
+                      indevidualHelperUser: false,
+                      bankUser: false,
+                      companyUser: true,
+                    })
+                  }>
+                  <Image
+                    source={
+                      this.state.companyUser ? Images.check : Images.uncheck
+                    }
+                    style={{height: hp(4), width: wp(5), resizeMode: 'contain'}}
+                  />
+                </TouchableOpacity>
+                <Text style={{marginLeft: wp(4)}}>
+                  Quiero ayudar (I want to help) Soy una empresa (I am a
+                  company)
+                </Text>
+              </View>
+            </View>
             <TextInput
               value={this.state.fname}
               onChangeText={(fname) => this.setState({fname})}
@@ -336,6 +422,14 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: colors.grey,
     height: 58,
+    borderRadius: 8,
+    margin: 10,
+  },
+  boxContainerBorderStyle: {
+    backgroundColor: colors.white,
+    borderWidth: 0.5,
+    borderColor: colors.grey,
+    padding: wp(2),
     borderRadius: 8,
     margin: 10,
   },

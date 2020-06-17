@@ -24,7 +24,10 @@ export default class Requests extends Component {
         return i.requests.userId === auth().currentUser.uid;
       });
       console.log('userReq', userReq);
-      this.setState({requests: userReq});
+      requestsUser = userReq.filter((i) => {
+        return i.requests.userInformation !== undefined;
+      });
+      this.setState({requests: requestsUser});
     });
   }
   render() {

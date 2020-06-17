@@ -8,7 +8,9 @@ import {
 
 import BankPoint from './src/screen/BankPoint';
 import BioDataForm from './src/screen/BioDataForm';
+import COVIDprecautions from './src/screen/COVIDprecautions';
 import ConfirmationCode from './src/screen/ConfirmationCode';
+import FoodPoints from './src/screen/FoodPoints';
 import Home from './src/screen/Home';
 import {Image} from 'react-native';
 import Images from './src/Image/Images';
@@ -99,9 +101,9 @@ const LoginStackNavigator = createStackNavigator(
     // UserCategory: {
     //   screen: UserCategory,
     // },
-    Splash: {
-      screen: Splash,
-    },
+    // Splash: {
+    //   screen: Splash,
+    // },
     Login: {
       screen: Login,
     },
@@ -124,7 +126,7 @@ const LoginStackNavigator = createStackNavigator(
     mapForBank: {
       screen: mapForBank,
     },
-    Home: {
+    HomeStack: {
       screen: HomeStackNavigator,
     },
     UserCategory: {
@@ -142,8 +144,14 @@ const LoginStackNavigator = createStackNavigator(
     IndividualScreenMap: {
       screen: IndividualScreenMap,
     },
+    FoodPoints: {
+      screen: FoodPoints,
+    },
     UserRequestDetail: {
       screen: UserRequestDetail,
+    },
+    COVIDprecautions: {
+      screen: COVIDprecautions,
     },
   },
   {

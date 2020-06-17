@@ -1,16 +1,19 @@
 import {
-    CheckBox,
-    Image,
-    KeyboardAvoidingView,
-    Picker,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  CheckBox,
+  Image,
+  KeyboardAvoidingView,
+  Picker,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import React, {Component} from 'react';
-import {heightPercentageToDP as hp, widthPercentageToDP as wp,} from 'react-native-responsive-screen';
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 
 import AsyncStorage from '@react-native-community/async-storage';
 import Geolocation from '@react-native-community/geolocation';
@@ -176,10 +179,7 @@ export default class Home extends Component {
                 24 * 60 * 60 * 1000 +
                 24 * 60 * 60 * 1000,
             ).getTime();
-            if (
-              currentTime >= tomorrowTime &&
-              currentTime <= tomorrowNextTime
-            ) {
+            if (currentTime <= tomorrowTime) {
               console.log('this.is tomorow time');
               this.setState({
                 withinTime: true,
@@ -187,6 +187,8 @@ export default class Home extends Component {
                 textToShow: 'You will be elligible for help after 1 days',
               });
             } else {
+              console.log('this.is tomorow time in else');
+
               this.setState({loading: false});
             }
           });
@@ -610,7 +612,8 @@ export default class Home extends Component {
             <Text style={{fontSize: wp(5), fontWeight: 'bold'}}>
               {this.state.textToShow}
             </Text>
-            <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('UserCategory')}>
               <Text
                 style={{
                   fontSize: wp(4),

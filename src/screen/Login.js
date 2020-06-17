@@ -42,7 +42,7 @@ export default class Login extends Component {
     GoogleSignin.configure({
       scopes: ['https://www.googleapis.com/auth/drive.readonly'],
       webClientId:
-        '1063381046055-47ro81c91o6hc5uk1g4dt1scp7lb44n7.apps.googleusercontent.com', // webClientId i told you to save somewhere,
+        '1063381046055-e55l58se6g6mbhvm3ibeifhh86e8esv2.apps.googleusercontent.com', // webClientId i told you to save somewhere,
       forceConsentPrompt: true, // if you want to show the authorization prompt at each login
     });
   }
@@ -97,7 +97,7 @@ export default class Login extends Component {
               Soy nuevo en Ayudapp
             </Text>
           </View>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => this.props.navigation.navigate('PhoneAuth')}>
             <View style={styles.ButtonContainer}>
               <Text style={[styles.buttonTxt]}>Login with phone</Text>
@@ -107,8 +107,28 @@ export default class Login extends Component {
                 style={{marginRight: 3}}
               />
             </View>
+          </TouchableOpacity> */}
+          <TouchableOpacity onPress={this.onGoogleSignIn}>
+            <Image
+              source={Images.google}
+              style={{
+                height: hp(15),
+                width: wp(25),
+                resizeMode: 'contain',
+                alignSelf: 'center',
+              }}
+            />
           </TouchableOpacity>
-
+          {/* <TouchableOpacity onPress={this.onGoogleSignIn}>
+            <View style={styles.ButtonContainer}>
+              <Text style={[styles.buttonTxt]}>Login with google</Text>
+              <Image
+                resizeMode="contain"
+                source={require('../Image/botton-Arrow.png')}
+                style={{marginRight: 3}}
+              />
+            </View>
+          </TouchableOpacity> */}
           <Loader loading={this.state.loading} />
         </View>
       </View>
@@ -137,16 +157,19 @@ export default class Login extends Component {
         Services.getUserProfile((userProfile) => {
           console.log('userProfile', userProfile);
           if (userProfile.user._data === undefined) {
-            Services.serUserProfile(res.user._auth._user._user.uid, (profile) => {
-              console.log('profile', profile);
-              if (profile.isSuccess) {
-                console.log('this', this);
+            Services.serUserProfile(
+              res.user._auth._user._user.uid,
+              (profile) => {
+                console.log('profile', profile);
+                if (profile.isSuccess) {
+                  console.log('this', this);
 
-                this.props.navigation.navigate('BioDataForm', {
-                  id: res.user._auth._user._user.uid,
-                });
-              }
-            });
+                  this.props.navigation.navigate('BioDataForm', {
+                    id: res.user._auth._user._user.uid,
+                  });
+                }
+              },
+            );
           } else {
             AsyncStorage.setItem('USER', res.user._auth._user._user.uid);
             console.log('this', this);
@@ -175,24 +198,7 @@ export default class Login extends Component {
       .then((user) => {
         this.setState({loading: false});
         console.log('-------User-------', user.user._user.uid);
-        Services.getUserProfile((userProfile) => {
-          console.log('userProfile', userProfile);
-          if (userProfile.user._data.userConfirmation === undefined) {
-            Services.serUserProfile(user.user._user.uid, (profile) => {
-              console.log('profile', profile);
-              if (profile.isSuccess) {
-                this.props.navigation.navigate('BioDataForm', {
-                  id: user.user._user.uid,
-                });
-              }
-            });
-          } else {
-            AsyncStorage.setItem('USER', user.user._user.uid);
-            this.props.navigation.navigate('UserCategory', {
-              id: user.user._user.uid,
-            });
-          }
-        });
+        this.onUserisSuccess(user);
       })
       .catch((error) => {
         console.log('-------error-------');
@@ -201,6 +207,31 @@ export default class Login extends Component {
 
         console.log(error);
       });
+  };
+
+  onUserisSuccess = (response) => {
+    console.log('onUserisSuccess response', response);
+
+    Services.getUserProfile((userProfile) => {
+      console.log('userProfile', userProfile);
+      if (userProfile.user._data === undefined) {
+        Services.serUserProfile(response.user._user.uid, (profile) => {
+          console.log('profile', profile);
+          if (profile.isSuccess) {
+            console.log('this', this);
+            this.props.navigation.navigate('BioDataForm', {
+              id: response.user._user.uid,
+            });
+          }
+        });
+      } else {
+        AsyncStorage.setItem('USER', response.user._user.uid);
+        console.log('this', this);
+        this.props.navigation.navigate('UserCategory', {
+          id: response.user._user.uid,
+        });
+      }
+    });
   };
 }
 

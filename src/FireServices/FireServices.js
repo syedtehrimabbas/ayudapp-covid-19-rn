@@ -134,6 +134,7 @@ class FireServices {
     town,
     building,
     time,
+    userType,
     callback,
   ) => {
     firestore()
@@ -152,6 +153,7 @@ class FireServices {
           town: town,
           building: building,
           time: time,
+          userType: userType,
         },
       })
       .then((profile) => {
@@ -404,7 +406,7 @@ class FireServices {
         time: time,
         term: term,
         image: image,
-        userType: userType,
+        userType: 'BankPoint',
         latitude: latitude,
         longitude: longitude,
         userId: auth().currentUser.uid,
