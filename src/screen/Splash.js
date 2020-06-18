@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Text, View,ImageBackground} from 'react-native';
+import {ImageBackground, StyleSheet} from 'react-native';
 import {NavigationActions, StackActions} from 'react-navigation';
 import React, {Component} from 'react';
 import RNAndroidLocationEnabler from 'react-native-android-location-enabler';
@@ -31,7 +31,6 @@ export default class Splash extends Component {
                 console.log('user id asy', res);
                 let screenName = '';
                 if (res !== null) {
-                    screenName = 'UserCategory';
 
                     FireServices.getUserProfile((user) => {
                         if (user.user._data !== undefined) {
@@ -39,7 +38,7 @@ export default class Splash extends Component {
                                 index: 0,
                                 actions: [
                                     NavigationActions.navigate({
-                                        routeName: `${'UserCategory'}`, params: {
+                                        routeName: `${'Login'}`, params: {
                                             type: user.user._data.userType   // this second parameter is for sending the params
                                         }
                                     }),

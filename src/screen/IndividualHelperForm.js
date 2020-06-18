@@ -1,22 +1,8 @@
-import {
-  Image,
-  Picker,
-  Platform,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Picker, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View,} from 'react-native';
 import React, {Component} from 'react';
-import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
+import {heightPercentageToDP as hp, widthPercentageToDP as wp,} from 'react-native-responsive-screen';
 
 import AsyncStorage from '@react-native-community/async-storage';
-import Dropdown from './DropDown';
-import Images from '../Image/Images';
 import {ScrollView} from 'react-native-gesture-handler';
 import Services from '../FireServices/FireServices';
 import auth from '@react-native-firebase/auth';
@@ -97,23 +83,7 @@ export default class IndividualHelperForm extends Component {
           </Text>
         </View>
         <ScrollView style={{height: hp(89)}}>
-          <Dropdown
-            dropdown={this.state.dropdown}
-            onCancel={() => this.setState({dropdown: false})}
-            onSignout={this.logout}
-          />
-          <TouchableOpacity onPress={() => this.setState({dropdown: true})}>
-            <Image
-              source={Images.dotmenu}
-              style={{
-                height: hp(5),
-                width: wp(7),
-                resizeMode: 'contain',
-                alignSelf: 'flex-end',
-                marginRight: wp(5),
-              }}
-            />
-          </TouchableOpacity>
+
           <View style={styles.subContainerStyle}>
             <Text style={styles.detailTextStyle}>Nambre (Name)</Text>
             <Text style={styles.detailTextStyle}>
