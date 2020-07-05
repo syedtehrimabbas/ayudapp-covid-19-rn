@@ -156,7 +156,8 @@ export default class Login extends Component {
         GoogleSignin.signOut();
         Services.getUserProfile((userProfile) => {
             console.log('userProfile', userProfile);
-            if (userProfile.user._data.biodata === undefined) {
+            if (userProfile.user._data === undefined || userProfile.user._data.biodata === undefined) {
+
                 Services.serUserProfile(response.user._user.uid, (profile) => {
                     console.log('profile', profile);
                     if (profile.isSuccess) {
