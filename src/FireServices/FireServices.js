@@ -1,7 +1,7 @@
+import {GoogleSignin} from '../../node_modules/react-native-google-signin/index';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
-import {GoogleSignin} from "../../node_modules/react-native-google-signin/index";
 
 class FireServices {
   getTockenForUniversalApi = (callback) => {
@@ -187,10 +187,10 @@ class FireServices {
         callback({isSuccess: true, user: res});
       });
   };
-    getCurrentUser = async () => {
-        const currentUser = await GoogleSignin.getCurrentUser();
-        this.setState({ currentUser });
-    };
+  getCurrentUser = async () => {
+    const currentUser = await GoogleSignin.getCurrentUser();
+    this.setState({currentUser});
+  };
   getRequestedOrderByUser = (callback) => {
     let requestsArray = [];
     firestore()

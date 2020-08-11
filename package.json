@@ -22,6 +22,7 @@
     "react-native": "0.62.2",
     "react-native-android-location-enabler": "^1.2.1",
     "react-native-confirmation-code-input": "^1.0.4",
+    "react-native-countdown-component": "^2.7.1",
     "react-native-fbsdk": "^1.1.2",
     "react-native-file-picker": "0.0.19",
     "react-native-geocoding": "^0.4.0",
